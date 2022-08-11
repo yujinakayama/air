@@ -3,6 +3,7 @@ package runner
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -286,6 +287,7 @@ func (e *Engine) watchNewDir(dir string, removeDir bool) {
 }
 
 func (e *Engine) isModified(filename string) bool {
+	fmt.Println(ioutil.ReadFile(filename))
 	newChecksum, err := fileChecksum(filename)
 	if err != nil {
 		e.watcherDebug("can't determine if file was changed: %v - assuming it did without updating cache", err)
